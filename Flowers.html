@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Letter</title>
+<link rel="stylesheet" href="styles.css">
+<style type="text/css" id="dcoder_stylesheet">/* Background color and overflow */
+.body {
+  background-color: #ffcccc;
+  overflow: hidden;
+}
+
+/* Question styling */
+.question {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ff0066;
+  font-size: 20px;
+}
+
+/* Envelope styling */
+.envelope {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background-color: #ff99cc;
+  border: 2px solid #cc6699;
+  border-radius: 15px;
+  padding: 20px;
+  transition: all 0.5s ease;
+}
+
+/* Flap styling */
+.flap {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 30px;
+  background-color: #ff99cc;
+  border: 2px solid #cc6699;
+  border-bottom: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Love letter styling */
+.love-letter {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 300px; /* Adjust maximum width as needed */
+  height: auto; /* Adjust height automatically */
+  background-color: #fff; /* Set background color to white */
+  border: 2px solid #cc6699;
+  overflow: auto;
+  padding: 10px;
+  text-align: center; /* Center-align text */
+}
+
+/* Button styling */
+button {
+  position: absolute;
+  bottom: 10px;
+  background-color: #ff0066; /* Change button color to pink */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Yes button styling */
+.yes {
+  position: absolute;
+  bottom: 10px; /* Position at the bottom of the envelope */
+  right: 10px; /* Align to the right side of the envelope */
+  background-color: #ff0066; /* Change button color to pink */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* No button styling */
+.no {
+  position: absolute;
+  bottom: 10px; /* Position at the bottom of the envelope */
+  left: 10px; /* Align to the left side of the envelope */
+  background-color: #ff0066; /* Change button color to pink */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  /* Align text properly */
+  display: flex;
+  align-items: center;
+}
+
+/* No button hover effect */
+.no:hover {
+  transform: none; /* Remove shape change */
+  border-radius: 5px; /* Ensure border-radius remains the same */
+}
+
+/* No button focus effect */
+.no:focus {
+  transform: none; /* Remove shape change */
+  border-radius: 5px; /* Ensure border-radius remains the same */
+}
+
+/* Animation when clicking "Yes" button */
+.envelope.open {
+  height: 500px;
+}
+
+/* Centering the envelope */
+.envelope {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background-color: #ff99cc;
+  border: 2px solid #cc6699;
+  border-radius: 15px;
+  padding: 20px;
+  transition: all 0.5s ease;
+}
+
+/* Love letter display */
+.love-letter.show {
+  display: block;
+}
+
+/* Love letter styling */
+.love-letter.show {
+  font-size: 14px; /* Adjust font size as needed */
+}</style></head>
+<body>
+<h1 class="question">ARE YOU WILLING TO BE MY GIRLFRIEND?</h1>
+<div class="envelope">
+  <div class="love-letter">
+    Hi love hehe nagawa kona nakapag gawa nadin ako and sana magustuhan mo, di sya perfect pero atleast magawan lang kita sorry di ko pa afford yung flowers and hirap gawin nung flowers pa eh pero love sana dito ma show ko yung love ko sayo. Thankyou love para sa lahat pati sa pag intindi sakin, promise love di kita iiwan and hanggang sa huli gagawin ko lahat para satin and para sayo. I LOVE YOU SO MUCH LOVE TO INFINITY AND BEYOND
+  </div>
+  <div class="flap"></div>
+  <button class="yes">Yes</button>
+  <button class="no">No</button>
+</div>
+
+<script src="script.js"></script>
+
+<script type="text/javascript" id="dcoder_script">document.querySelector('.no').addEventListener('click', function() {
+  var noButton = document.querySelector('.no');
+  var envelope = document.querySelector('.envelope');
+  var envelopeRect = envelope.getBoundingClientRect();
+  var envelopeCenterX = envelopeRect.left + envelopeRect.width / 2;
+  var envelopeCenterY = envelopeRect.top + envelopeRect.height / 2;
+  var maxDistance = 50; // Maximum distance from the envelope
+
+  // Calculate random position within a range around the envelope
+  var newX = envelopeCenterX + (Math.random() * 2 - 1) * maxDistance;
+  var newY = envelopeCenterY + (Math.random() * 2 - 1) * maxDistance;
+
+  // Ensure the button stays within the viewport
+  newX = Math.max(0, Math.min(window.innerWidth - noButton.offsetWidth, newX));
+  newY = Math.max(0, Math.min(window.innerHeight - noButton.offsetHeight, newY));
+
+  // Set the new position for the button
+  noButton.style.left = newX + 'px';
+  noButton.style.top = newY + 'px';
+
+  // Change shape of the button
+  noButton.style.borderRadius = '50%';
+});
+
+document.querySelector('.yes').addEventListener('click', function() {
+  // Add class to envelope to trigger animation
+  document.querySelector('.envelope').classList.add('open');
+
+  // Hide buttons
+  var buttons = document.querySelectorAll('button');
+  buttons.forEach(function(button) {
+    button.style.display = 'none';
+  });
+
+  // Show love letter
+  document.querySelector('.love-letter').style.display = 'block';
+});</script></body></html>
